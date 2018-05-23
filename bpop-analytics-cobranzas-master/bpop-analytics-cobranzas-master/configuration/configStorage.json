@@ -1,0 +1,7 @@
+{
+  "S3_Configuration":{
+    "AWS_BUCKET_ID": "gb-analytics-dev-rnode-data-571787340458-6fdbe2d0",
+    "AWS_CLI_PATH": "/usr/bin/aws",
+    "EBS_ROOT_PATH": "/home/mck/"
+  }
+}

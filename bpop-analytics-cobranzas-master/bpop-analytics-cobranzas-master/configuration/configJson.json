@@ -1,0 +1,108 @@
+{
+  "varCliente": "ID_CLIENTE",
+  "varProducto": "ID_CONTRATO",
+  "varPeriodo": "YEAR_MONTH_DAY",
+  "DataPreparationConfig": {
+      "processFunctionsDaily": [
+        "processMora"
+        ],
+        "processFunctionsMonthly": [
+        "processTxPasivo",
+        "processBuro",
+        "processContratos",
+        "processClientes"
+        ],
+      "expandFunctionsDaily": [
+        "createCustomerBase",
+        "createMoraMaster",
+        "createTargetMaster",
+        "createMasterTable"
+        ],
+      "expandFunctionsMonthly": [
+        "createBuroMaster",
+        "createContratosMaster",
+        "createTxPasivoMaster"
+        ],
+      "Tables": {
+        "CustomerBase": {
+          "path": "customerBaseExpandedPath",
+          "filename": "caseBase",
+          "tag": "",
+          "keys": ["ID_CONTRATO"]
+        },
+        "Mora": {
+          "path": "moraExpandedPath",
+          "filename": "expandedMora",
+          "tag": "MORA",
+          "keys": [
+            "ID_CONTRATO"
+            ]
+          
+        },
+        "Target": {
+          "path": "targetExpandedPath",
+          "filename": "target",
+          "tag": "TARG",
+          "keys": [
+            "ID_CONTRATO"
+            ]
+        },
+        "Contratos": {
+          "path": "contratosExpandedPath",
+          "filename": "expandedContratos",
+          "tag": "CONT",
+          "keys": [
+            "ID_CONTRATO"
+            ]
+            },
+        "Buro": {
+          "path": "buroExpandedPath",
+          "filename": "expandedBuro",
+          "tag": "BURO",
+          "keys": ["ID_CLIENTE"]
+          },
+        "Clientes": {
+          "path": "clientesProcessedPath",
+          "filename": "processedClientes",
+          "tag": "CLIE",
+          "keys": ["ID_CLIENTE"]
+          },
+        "txPasivo": {
+          "path": "txPasivoExpandedPath",
+          "filename": "expandedTxPasivo",
+          "tag": "TXPA",
+          "keys": ["ID_CLIENTE"]
+          }
+          }
+    },
+    "Modelling":{
+      "targetVariable": "TARGET_BINARY",
+      "daysForDevelopment":"30",
+      "parameters":{
+        "booster":"gbtree",
+        "objective":"binary:logistic",
+        "eval_metric":"auc",
+        "tree_method":"exact",
+        "eta":0.05,
+        "max_depth":12,
+        "gamma":12,
+        "alpha":6,
+        "lambda":6,
+        "colsample_by_tree":1,
+        "subsample":0.9}
+    },
+    "OutputFileNames":{
+      "processMora" : {"path" : "moraProcessedPath", "prefix" : "processedMora_"},
+      "processTxPasivo" : {"path" : "txPasivoProcessedPath", "prefix" : "processedTX_pasivo_"},
+      "processBuro" : {"path" : "buroProcessedPath", "prefix" : "processedBuro_"},
+      "processContratos" : {"path" : "contratosProcessedPath", "prefix" : "processedContratos_"},
+      "processClientes" : {"path" : "clientesProcessedPath", "prefix" : "processedClientes_"},
+      "createCustomerBase" : {"path" : "customerBaseExpandedPath", "prefix" : "caseBase_"},
+      "createMoraMaster" : {"path" : "moraExpandedPath", "prefix" : "expandedMora_"},
+      "createTargetMaster" : {"path" : "targetExpandedPath", "prefix" : "target_"},
+      "createMasterTable" : {"path" : "masterTableExpandedPath", "prefix" : "masterTable_"},
+      "createBuroMaster" : {"path" : "buroExpandedPath", "prefix" : "expandedBuro_"},
+      "createContratosMaster" : {"path" : "contratosExpandedPath", "prefix" : "expandedContratos_"},
+      "createTxPasivoMaster" : {"path" : "txPasivoExpandedPath", "prefix" : "expandedTxPasivo_"}
+    }
+}
